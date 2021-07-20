@@ -112,7 +112,6 @@ const employeeManager = () =>{
     console.log('Preparing Manager List...')
     connection.query('SELECT * FROM employee WHERE manager_id IS null', (err, results) => {
         if (err) throw err;
-        console.log(results);
         inquirer
             .prompt([
                 {
@@ -246,7 +245,6 @@ let updateEmployeeRole = (employee) => {
                 }
             ])
             .then((data) => {
-                console.log(employee);
                 let chosenRole;
                 results.forEach((role) => {
                     if (role.title == data.roles) {
