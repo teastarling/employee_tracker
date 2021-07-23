@@ -78,7 +78,7 @@ const renderMenuChoice = (menu) => {
 };
 
 // render employee table w/info according to relevant data from other tables according to foreign keys
-let renderEmployeeList = () => {
+const renderEmployeeList = () => {
     console.log('Collecting Employee Data...');
     connection.query('SELECT employee.id, employee.first_name, employee.last_name, roles.title, department.dept_name AS department, roles.salary FROM employee LEFT JOIN roles ON employee.role_id = roles.id LEFT JOIN department ON roles.department_id = department.id', (err, results) => {
         if (err) throw err;
@@ -87,8 +87,9 @@ let renderEmployeeList = () => {
     });
 };
 
+
 // render role table
-let viewRoles = () => {
+const viewRoles = () => {
     console.log('Collecting Role Data...');
     connection.query('SELECT * FROM roles', (err, results) => {
         if (err) throw err;
@@ -98,7 +99,7 @@ let viewRoles = () => {
 };
 
 // render department table
-let viewDepartments = () => {
+const viewDepartments = () => {
     console.log('Collecting Department Data...');
     connection.query('SELECT * FROM department', (err, results) => {
         if (err) throw err;
@@ -194,7 +195,7 @@ const addEmployee = (manager) => {
 };
 
 // render employee list for 'update employee role' option
-let chooseEmployee = () => {
+const chooseEmployee = () => {
     console.log('Collecting Possible Employees...');
     connection.query('SELECT * FROM employee', (err, results) => {
         if (err) throw err;
@@ -224,7 +225,7 @@ let chooseEmployee = () => {
 };
 
 // render role list for 'update employee role' option with employee info parameter. changes employee role according to user choices
-let updateEmployeeRole = (employee) => {
+const updateEmployeeRole = (employee) => {
     console.log('Collecting Roles...');
     connection.query('SELECT * FROM roles', (err, results) => {
         if (err) throw err;
@@ -273,7 +274,7 @@ let updateEmployeeRole = (employee) => {
 };
 
 // adds new role within department choices
-let addRole = () => {
+const addRole = () => {
     console.log('Preparing to Add New Role...');
     connection.query('SELECT * FROM department', (err, results) => {
         if (err) throw err;
@@ -329,7 +330,7 @@ let addRole = () => {
 };
 
 // adds new department
-let addDepartment = () => {
+const addDepartment = () => {
     console.log('Preparing to Add New Department...');
     inquirer
         .prompt([
