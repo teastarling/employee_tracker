@@ -80,13 +80,12 @@ const renderMenuChoice = (menu) => {
 // render employee table w/info according to relevant data from other tables according to foreign keys
 const renderEmployeeList = () => {
     console.log('Collecting Employee Data...');
-    connection.query('SELECT employee.id, employee.first_name, employee.last_name, roles.title, department.dept_name AS department, roles.salary FROM employee LEFT JOIN roles ON employee.role_id = roles.id LEFT JOIN department ON roles.department_id = department.id', (err, results) => {
+    connection.query('SELECT employee.id, employee.first_name, employee.last_name, roles.title, department.dept_name AS department, roles.salary, CONCAT (manager.first_name, " ", manager.last_name) AS manager FROM employee LEFT JOIN roles ON employee.role_id = roles.id LEFT JOIN department ON roles.department_id = department.id LEFT JOIN employee manager ON manager.id = employee.manager_id', (err, results) => {
         if (err) throw err;
         console.table(results);
         init();
     });
 };
-
 
 // render role table
 const viewRoles = () => {
@@ -126,6 +125,7 @@ const employeeManager = () =>{
                                 value: id
                             });
                         })
+                        managerArray.unshift({name:"none", value: null});
                         return managerArray;
                     },
                     message: 'Please choose a manager:',
